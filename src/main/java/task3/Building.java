@@ -26,6 +26,22 @@ public class Building extends Entity{
             this.grabList = new ArrayList<>();
         }
 
+        public boolean isOpen() {
+            return open;
+        }
+
+        public void setOpen(boolean open) {
+            this.open = open;
+        }
+
+        public double getOpenPower() {
+            return openPower;
+        }
+
+        public void setOpenPower(double openPower) {
+            this.openPower = openPower;
+        }
+
         boolean open;
         public double openPower;
 
@@ -46,7 +62,6 @@ public class Building extends Entity{
                 names.append(human.getName()).append(", ");
             }
             names.append("пытаются открыть дверь с силой ").append(totalPower);
-            System.out.println(names);
             if (totalPower >= openPower) {
                 open = true;
             }

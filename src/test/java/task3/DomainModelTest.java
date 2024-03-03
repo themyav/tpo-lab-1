@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DomainModelTest {
 
@@ -48,11 +48,22 @@ public class DomainModelTest {
     }
 
     @Test
-    void doorOpenCheck(){
+    void testDoorNotOpened(){
         ford.setPushPower(20);
         zaford.setPushPower(10);
         door.push(pusher);
+        assertEquals(door.push(pusher), "Форд, Зафорд, пытаются открыть дверь с силой 30.0");
+        assertFalse(door.isOpen());
+        door.setOpen(false);
+    }
 
+    @Test
+    void testDoorOpened(){
+        ford.setPushPower(10);
+        zaford.setPushPower(91);
+        assertEquals(door.push(pusher), "Форд, Зафорд, пытаются открыть дверь с силой 101.0");
+        assertTrue(door.isOpen());
+        door.setOpen(false);
 
     }
 }
