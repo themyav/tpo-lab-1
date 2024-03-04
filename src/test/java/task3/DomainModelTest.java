@@ -2,6 +2,8 @@ package task3;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,8 +66,44 @@ public class DomainModelTest {
         assertEquals(door.push(pusher), "Форд, Зафорд, пытаются открыть дверь с силой 101.0");
         assertTrue(door.isOpen());
         door.setOpen(false);
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(doubles = {1.05, 5, 1000})
+    void testFlyPositive(double value){
+        Rodent mice = flyingRodents.get(0);
+        mice.setX(0);
+        mice.setY(0);
+        mice.setZ(0);
+        assertEquals(mice.fly(value), "мышь летит на высоте " + value);
+        assertEquals(value, mice.getZ());
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {0, -1.1, -100})
+    void testFlyNotPositive(double value){
+        Rodent mice = flyingRodents.get(0);
+        mice.setX(0);
+        mice.setY(0);
+        mice.setZ(0);
+        assertEquals(mice.fly(value), "мышь находится на земле");
+        assertEquals(mice.getZ(), 0);
+    }
+
+    @Test
+    void testAnimalMove(){
 
     }
+
+    //TODO
+    /*
+    1) animal move test
+    2) mood test
+    3) что-то про гипнотизирование?
+    4) Сделать сумму не до n, а большую и точную (с большими числами??)
+    5) Читать теорию
+     */
 }
 
 /*

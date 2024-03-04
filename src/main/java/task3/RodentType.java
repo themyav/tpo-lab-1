@@ -1,7 +1,13 @@
 package task3;
 
 public enum RodentType {
-    MICE,
-    HAMSTER,
-    CAPYBARA
+    MICE("мышь"),
+    HAMSTER("хомяк"),
+    CAPYBARA("капибара");
+
+
+    public final String name;
+    RodentType(String name) {
+        this.name = name;
+    }
 }

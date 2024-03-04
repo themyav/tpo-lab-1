@@ -8,8 +8,12 @@ public class Rodent extends Animal implements Flyable{
     }
 
     @Override
-    public void fly(double z) {
+    public String fly(double z) {
+        if(z <= 0) {
+            this.move(0, 0, 0);
+            return this.type.name + " находится на земле";
+        }
         this.move(0, 0, z);
-        System.out.println("Грызуны летят на высоте " + z);
+        return this.type.name + " летит на высоте " + z;
     }
 }
