@@ -6,6 +6,16 @@ public class Human extends Animal implements Moveable{
 
     public double pushPower;
 
+    public Emotion mood;
+
+    public Emotion getMood() {
+        return mood;
+    }
+
+    public void setMood(Emotion mood) {
+        this.mood = mood;
+    }
+
     public String getName() {
         return name;
     }

@@ -18,7 +18,12 @@ public class Building extends Entity{
         }
     }
 
-    class Door{
+    class Door extends Entity{
+
+        @Override
+        public String toString() {
+            return "дверь { " + (this.open ? "открытая" : "закрытая") + ", мощность открытия: " + this.openPower + " }";
+        }
 
         public Door(boolean open, double openPower) {
             this.open = open;
@@ -34,6 +39,9 @@ public class Building extends Entity{
             this.open = open;
         }
 
+        boolean open;
+        public double openPower;
+
         public double getOpenPower() {
             return openPower;
         }
@@ -42,18 +50,8 @@ public class Building extends Entity{
             this.openPower = openPower;
         }
 
-        boolean open;
-        public double openPower;
-
         public ArrayList<Human>grabList;
 
-        public void grab(Human human){
-            grabList.add(human);
-        }
-
-        public void release(Human human){
-            grabList.remove(human);
-        }
         public String push(ArrayList<Human> pushList) {
             double totalPower = 0;
             StringBuilder names = new StringBuilder();
@@ -67,7 +65,6 @@ public class Building extends Entity{
             }
             return names.toString();
         }
-
 
 
 

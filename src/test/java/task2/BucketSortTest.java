@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class BucketSortTest {
 
@@ -23,13 +24,17 @@ public class BucketSortTest {
 
     @Test
     void testBucketSortMultipleElements() {
-        ArrayList<Integer> input = new ArrayList<>(Arrays.asList(29, 13, 6, 22, 8));
+        ArrayList<Integer> input = new ArrayList<>();
+        for(int i = 0; i < 1000; i++) input.add(i);
+        Collections.shuffle(input);
         assertEquals(getSorted(input), BucketSort.bucketSort(input));
     }
 
     @Test
     void testBucketSortDuplicateElements() {
-        ArrayList<Integer> input = new ArrayList<>(Arrays.asList(5, 2, 9, 5, 2));
+        ArrayList<Integer> input = new ArrayList<>();
+        Random random = new Random();
+        for(int i = 0; i < 1000; i++) input.add(random.nextInt(1000));
         assertEquals(getSorted(input), BucketSort.bucketSort(input));
     }
 

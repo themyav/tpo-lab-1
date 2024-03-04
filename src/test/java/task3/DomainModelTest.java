@@ -1,6 +1,7 @@
 package task3;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -45,11 +46,20 @@ public class DomainModelTest {
     }
 
     @Test
+    @DisplayName("grab test")
     void grabCheck(){
         assertEquals(trillian.grab(arthur), "Триллиан хватает человек { имя: Артур, пол: мужской }");
     }
 
     @Test
+    @DisplayName("pull test")
+    void pullCheck(){
+        door.setOpenPower(50);
+        assertEquals(trillian.pull(arthur, door), "Триллиан тащит человек { имя: Артур, пол: мужской } в направлении дверь { закрытая, мощность открытия: 50.0 }");
+    }
+
+    @Test
+    @DisplayName("door not opened test")
     void testDoorNotOpened(){
         ford.setPushPower(20);
         zaford.setPushPower(10);
@@ -60,6 +70,8 @@ public class DomainModelTest {
     }
 
     @Test
+    @DisplayName("door opened test")
+
     void testDoorOpened(){
         ford.setPushPower(10);
         zaford.setPushPower(91);
@@ -70,6 +82,7 @@ public class DomainModelTest {
 
 
     @ParameterizedTest
+    @DisplayName("fly positive height test")
     @ValueSource(doubles = {1.05, 5, 1000})
     void testFlyPositive(double value){
         Rodent mice = flyingRodents.get(0);
@@ -81,6 +94,7 @@ public class DomainModelTest {
     }
 
     @ParameterizedTest
+    @DisplayName("fly not positive height test")
     @ValueSource(doubles = {0, -1.1, -100})
     void testFlyNotPositive(double value){
         Rodent mice = flyingRodents.get(0);
@@ -92,20 +106,29 @@ public class DomainModelTest {
     }
 
     @Test
+    @DisplayName("move test")
     void testAnimalMove(){
-
+        arthur.setX(0);
+        arthur.setY(0);
+        arthur.setZ(0);
+        arthur.move(5, 6, 7);
+        assertEquals(5, arthur.getX());
+        assertEquals(6, arthur.getY());
+        assertEquals(7, arthur.getZ());
     }
 
-    //TODO
-    /*
-    1) animal move test
-    2) mood test
-    3) что-то про гипнотизирование?
-    4) Сделать сумму не до n, а большую и точную (с большими числами??)
-    5) Читать теорию
-     */
-}
+    @Test
+    @DisplayName("mood test")
+    void testMood(){
+        trillian.setMood(Emotion.DESPAIR);
+        assertEquals("разочарование", trillian.getMood().name);
+    }
 
-/*
-Триллиан в отчаянии схватила его за руку и потянула к двери, которую Форд и Зафод пытались открыть, но Артур был, как труп -- казалось, надвигающиеся воздухоплавающие грызуны загипнотизировали его.
- */
+    @Test
+    @DisplayName("hypnotyze test")
+    void testHypnotyze(){
+        Rodent mice = flyingRodents.get(1);
+        assertEquals(mice.hypnotize(arthur), "мышь гипнотизирует человек { имя: Артур, пол: мужской }");
+
+    }
+}

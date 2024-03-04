@@ -1,6 +1,6 @@
 package task3;
 
-public class Rodent extends Animal implements Flyable{
+public class Rodent extends Animal implements Flyable {
     public RodentType type;
 
     public Rodent(RodentType type) {
@@ -15,5 +15,9 @@ public class Rodent extends Animal implements Flyable{
         }
         this.move(0, 0, z);
         return this.type.name + " летит на высоте " + z;
+    }
+
+    public String hypnotize(Animal animal) {
+        return this.type.name + " гипнотизирует " + animal.toString();
     }
 }

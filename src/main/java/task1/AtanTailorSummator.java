@@ -1,11 +1,19 @@
 package task1;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class AtanTailorSummator {
-    public static double getSum(double x, int n){
-        double sum = 0;
+    public static double getSum(double x) {
+        BigDecimal sum = BigDecimal.ZERO;
+        BigDecimal X = BigDecimal.valueOf(x);
+        int n = 30;
+
         for (int i = 0; i < n; i++) {
-            sum += Math.pow(-1, i) * Math.pow(x, 2 * i + 1) / (2 * i + 1);
+            BigDecimal numerator = BigDecimal.valueOf(Math.pow(-1, i)).multiply(X.pow(2 * i + 1));
+            BigDecimal denominator = BigDecimal.valueOf(2L * i + 1);
+            sum = sum.add(numerator.divide(denominator, 20, RoundingMode.HALF_UP));
         }
-        return sum;
+        return sum.doubleValue();
     }
 }

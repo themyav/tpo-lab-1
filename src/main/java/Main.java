@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        double res = AtanTailorSummator.getSum(1, 5);
-        System.out.println(res);
 
 
         ArrayList<Integer> myList = new ArrayList<>();
